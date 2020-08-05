@@ -13,7 +13,7 @@ public class ConsistentHashingWithVirtualNode {
 	/**
 	 * 待添加入Hash环的服务器列表
 	 */
-	private static List<String> SERVER_LIST =
+	private static final List<String> SERVER_LIST =
 		Arrays.asList(
 			"192.168.0.0:111",
 			"192.168.0.1:111",
@@ -47,7 +47,7 @@ public class ConsistentHashingWithVirtualNode {
 		}));
 	}
 
-	public static String getServerURL(String node) {
+	public static String getServerUrl(String node) {
 		int hash = HashFunction.FNV1_32_HASH(node);
 		SortedMap<Integer, String> subMap = VIRTUAL_NODES.tailMap(hash);
 		if (subMap.isEmpty()) {
@@ -62,6 +62,6 @@ public class ConsistentHashingWithVirtualNode {
 		System.out.println("--------------------------------");
 		Arrays.asList(
 			"127.0.0.1:1111", "221.226.0.1:2222", "10.211.0.1:3333", "223.213.34.67:2341"
-		).forEach(e -> System.out.println(getServerURL(e)));
+		).forEach(e -> System.out.println(getServerUrl(e)));
 	}
 }
